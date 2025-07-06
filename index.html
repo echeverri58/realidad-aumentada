@@ -42,34 +42,40 @@
     </div>
 
     <!-- Escena de A-Frame con AR.js integrado -->
-    <a-scene embedded arjs='sourceType: webcam; debugUIEnabled: false;'>
+    <a-scene
+        embedded
+        arjs='sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;'
+        renderer='logarithmicDepthBuffer: true;'
+        vr-mode-ui='enabled: false'>
 
-        <!-- 
-            Creamos el objeto 3D que queremos mostrar.
-            En este caso, es un cubo (a-box).
-            - position: Lo centra en el marcador.
-            - material: Le da un color cian.
-        -->
-        <a-box position='0 0.5 0' material='color: #4dd0e1; opacity: 0.9;'>
+        <a-marker preset='hiro'>
             <!-- 
-                Animación para que el cubo rote sobre su eje Y.
-                - attribute: La propiedad que queremos animar (rotation).
-                - to: El estado final de la rotación (una vuelta completa en X y Y).
-                - loop: Para que la animación se repita infinitamente.
-                - dur: Duración de una rotación completa en milisegundos.
-                - easing: Tipo de aceleración (lineal para velocidad constante).
+                Creamos el objeto 3D que queremos mostrar.
+                En este caso, es un cubo (a-box).
+                - position: Lo centra en el marcador.
+                - material: Le da un color cian.
             -->
-            <a-animation
-                attribute="rotation"
-                to="360 360 0"
-                loop="true"
-                dur="8000"
-                easing="linear">
-            </a-animation>
-        </a-box>
+            <a-box position='0 0.5 0' material='color: #4dd0e1; opacity: 0.9;'>
+                <!-- 
+                    Animación para que el cubo rote sobre su eje Y.
+                    - attribute: La propiedad que queremos animar (rotation).
+                    - to: El estado final de la rotación (una vuelta completa en X y Y).
+                    - loop: Para que la animación se repita infinitamente.
+                    - dur: Duración de una rotación completa en milisegundos.
+                    - easing: Tipo de aceleración (lineal para velocidad constante).
+                -->
+                <a-animation
+                    attribute="rotation"
+                    to="360 360 0"
+                    loop="true"
+                    dur="8000"
+                    easing="linear">
+                </a-animation>
+            </a-box>
+        </a-marker>
 
-        <!-- Definimos el marcador que activará la cámara -->
-        <a-marker-camera preset='hiro'></a-marker-camera>
+        <!-- Definimos la cámara estática -->
+        <a-entity camera></a-entity>
     </a-scene>
 </body>
 </html>
